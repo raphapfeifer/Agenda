@@ -7,11 +7,8 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import alura.com.br.R;
+import alura.com.br.dao.AlunoDao;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -19,13 +16,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+
+        AlunoDao dao = new AlunoDao();
+
         setTitle("Lista de alunos");
-        List<String> alunos = new ArrayList<>(Arrays.asList(
-              "Raphael", "Tosco", "Mais um","Maria", "Ana"
-        ));
+
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
-        listaDeAlunos.setAdapter(new ArrayAdapter<String>(this,
+        listaDeAlunos.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
-                alunos));
+                dao.todos()));
     }
 }
