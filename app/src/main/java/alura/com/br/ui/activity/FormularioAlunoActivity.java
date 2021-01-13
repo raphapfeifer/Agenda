@@ -18,6 +18,8 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
 
+        setTitle("Novo aluno");
+
         AlunoDao dao = new AlunoDao();
 
         final EditText campoNome = findViewById(R.id.activity_formulario_aluno_nome);
