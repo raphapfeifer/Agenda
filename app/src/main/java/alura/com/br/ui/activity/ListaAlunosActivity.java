@@ -2,7 +2,6 @@ package alura.com.br.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,8 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 import alura.com.br.R;
 import alura.com.br.dao.AlunoDao;
+import alura.com.br.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -28,7 +30,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
-
+        dao.salva(new Aluno("Raphael","970286864","rapha_pfeifer@yahoo.com.br"));
+        dao.salva(new Aluno("Tosco","123456","gmail@gmail"));
     }
 
     private void configuraFabNovoAluno() {
@@ -55,14 +58,18 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private void configuraLista() {
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
+        final List<Aluno> alunos = dao.todos();
         listaDeAlunos.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
-                dao.todos()));
+                alunos));
 
         listaDeAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("posição aluno", "" + position);
+                Aluno alunoEscolhido = alunos.get(position);
+                Intent vaiParaFormularioActivity = new Intent(ListaAlunosActivity.this, FormularioAlunoActivity.class);
+                vaiParaFormularioActivity.putExtra("aluno",alunoEscolhido);
+                startActivity(vaiParaFormularioActivity);
             }
         });
     }
