@@ -34,21 +34,21 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
         configuraLista();
-        dao.salva(new Aluno("Raphael","970286864","rapha_pfeifer@yahoo.com.br"));
-        dao.salva(new Aluno("Tosco","123456","gmail@gmail"));
+        dao.salva(new Aluno("Raphael", "970286864", "rapha_pfeifer@yahoo.com.br"));
+        dao.salva(new Aluno("Tosco", "123456", "gmail@gmail"));
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.activity_lista_alunos_menu,menu);
+        getMenuInflater().inflate(R.menu.activity_lista_alunos_menu, menu);
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
         int itemId = item.getItemId();
-        if(itemId == R.id.activity_lista_alunos_menu_remover){
+        if (itemId == R.id.activity_lista_alunos_menu_remover) {
             AdapterView.AdapterContextMenuInfo menuInfo =
                     (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
@@ -111,7 +111,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private void abreFormularioModoEditaAluno(Aluno aluno) {
         Intent vaiParaFormularioActivity = new Intent(ListaAlunosActivity.this, FormularioAlunoActivity.class);
-        vaiParaFormularioActivity.putExtra(CHAVE_ALUNO,aluno);
+        vaiParaFormularioActivity.putExtra(CHAVE_ALUNO, aluno);
         startActivity(vaiParaFormularioActivity);
     }
 
